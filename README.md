@@ -41,6 +41,8 @@ using 2 hash functions. With collision probability of p=0.005.
 <img alt="formula" src="https://render.githubusercontent.com/render/math?math=m%20=%20\frac{n\log%20p}{\log%20\left(\frac{1}{2^{\log%202}}\right)}%20=%20\frac{n%20\log%20p}{\log(0.6185)}." />
 
 ## Performance
+When we run 100 tests with current bloom filter setup on [words](https://en.wikipedia.org/wiki/Words_(Unix)) 
+with 10000 randomly generated strings. We will end up with an average collision probability ~0.005.
 ![False positives](/readme/collision_chart.png?raw=true "How bloom filter works")
 
 How to use this library

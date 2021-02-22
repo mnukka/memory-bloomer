@@ -1,4 +1,14 @@
-# Memory Bloomer
+---
+title: Memory Bloomer
+description: Memory cache using bloom filter
+author: Miko Nukka
+created:  2021 Feb 02
+modified: 2021 Feb 02
+
+---
+
+Memory Bloomer
+=========
 This is a memory cache module that supports using bloom filter as an underlying data structure model.
 
 ![Bloom filter in action](/readme/bloomfilter_how_it_works.gif?raw=true "How bloom filter works")

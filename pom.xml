@@ -3,10 +3,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.github.mnukka</groupId>
     <artifactId>memory-bloomer</artifactId>
     <version>1.0</version>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Miko Nukka</name>
+            <email>mnukka@gmail.com</email>
+            <organization>Code for Humans</organization>
+            <organizationUrl>https://cfh.ee</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/mnukka/memory-bloomer.git</connection>
+        <developerConnection>scm:git:ssh://github.com:mnukka/memory-bloomer.git</developerConnection>
+        <url>https://github.com/mnukka/memory-bloomer/tree/main</url>
+    </scm>
     <repositories>
         <repository>
             <id>jitpack.io</id>
@@ -33,7 +51,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>11</release>
+                    <source>11</source>
+                    <target>1.8</target>
+                    <release>1.8</release>
                 </configuration>
             </plugin>
         </plugins>

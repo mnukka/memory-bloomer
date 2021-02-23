@@ -34,7 +34,7 @@ import java.util.stream.Stream;
  * @param <T> the type parameter for elements which are to be hashed within bitmap of bloom filter
  * @apiNote This is 32bit bloom filter, meaning maximum number of bits that can be stored is equal to Integer.MAX_VALUE.
  * In laymen terms this means that in order to have collision probability of 0.005 satisfied,
- * maximum number of items which can be stored in the filter is 787_430_24.
+ * maximum number of items which can be stored in the filter is 78_743_024.
  * This would cost 25,6MiB for bitmap size.
  *
  * @author Miko Nukka

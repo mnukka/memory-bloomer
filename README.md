@@ -2,8 +2,8 @@
 title: Memory Bloomer
 description: Memory cache using bloom filter
 author: Miko Nukka
-created:  2021 Feb 02
-modified: 2021 Feb 02
+created:  2021 Feb 22
+modified: 2021 Feb 24
 
 ---
 

@@ -3,7 +3,7 @@ title: Memory Bloomer
 description: Memory cache using bloom filter
 author: Miko Nukka
 created:  2021 Feb 18
-modified: 2021 Feb 24
+modified: 2021 Feb 25
 
 ---
 
@@ -80,7 +80,7 @@ return new CacheBuilder()
 
 ### Conventions
 * Clean code
-* Naming test methods: _MethodName_StateUnderTest_ExpectedBehavior_
+* Naming test methods: _methodName_StateUnderTest_ExpectedBehavior_
 
 #### References
 1. Probabilistic Data Structures And Algorithms by Andrii Gakhov

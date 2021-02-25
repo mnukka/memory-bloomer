@@ -59,7 +59,7 @@ public final class BloomFilter32<T> implements IDataStructure<T>, IMemoryCache<T
      */
     @Override
     public IMemoryCache createCache(final List<IHashFunction> hashFunctionList, final List<T> input) {
-        if (hashFunctionList == null || input == null) {
+        if (hashFunctionList == null || input == null || hashFunctionList.contains(null) || input.contains(null)) {
             throw new NullPointerException("createCache must be provided with non-null arguments as parameters");
         }
 
@@ -87,12 +87,22 @@ public final class BloomFilter32<T> implements IDataStructure<T>, IMemoryCache<T
      * bitmap during the createCache call
      * @return boolean value which indicates whether the key is
      * <i>possibly in set</i> (true) or <i>definitely not in set</i> (false)
+     * @throws IllegalStateException when class has not been fully initialized (i.e createCache() has not been called yet)
+     * @throws NullPointerException when provided null as an input argument
      * @apiNote The probability for false positives (collisions) with default implementation
      * is p=0.005. In laymen terms it means that on average for every 10000 requests to bitmap
      * with keys that have not been indexed, you will get 50 false positives back.
      */
     @Override
     public boolean isKeyPresent(T input) {
+        if (hashFunctionList == null || bitmapSize == 0 || bitMap == null) {
+            throw new IllegalStateException("BloomFilter32 is not fully initialized. Tip: has createCache() been called on the class instance?");
+        }
+
+        if (input == null) {
+            throw new NullPointerException("isKeyPresent does not expect null as an argument");
+        }
+
         byte[] key = convertObjToByte(input);
         List<Integer> hashes = hashKey(key).collect(Collectors.toList());
         return hashes.stream().allMatch(bitMap::get);

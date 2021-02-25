@@ -19,14 +19,14 @@ class BloomMathTest {
     private final int NUM_OF_ITEMS_TO_STORE = 338882;
 
     @Test
-    void findCollisionProbability_withPreCalculatedVariables_equals() {
+    void findCollisionProbability_WithPreCalculatedVariables_Equals() {
         int expectedBitCount = 9284410;
         double probability = BloomMath.findCollisionProbability(NUM_OF_HASH_FUNCTIONS, NUM_OF_ITEMS_TO_STORE, expectedBitCount);
         assertEquals(COLLISION_PROBABILITY, probability);
     }
 
     @Test
-    void optimalBits_withPreCalculatedVariables_equalsRounded() {
+    void optimalBits_WithPreCalculatedVariables_EqualsRounded() {
         double m = BloomMath.optimalBits(NUM_OF_HASH_FUNCTIONS, NUM_OF_ITEMS_TO_STORE, COLLISION_PROBABILITY);
         int expectedBitCount = 9284438;
         assertEquals(expectedBitCount, Math.floor(m));

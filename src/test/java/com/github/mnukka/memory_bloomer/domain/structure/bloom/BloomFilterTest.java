@@ -24,6 +24,13 @@ class BloomFilterTest {
     }
 
     @Test
+    void createCache_WithNullInListArguments_ThrowsNPE() {
+        final BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
+        Assertions.assertThrows(NullPointerException.class, () -> bloomFilter32.createCache(Collections.singletonList(new MurmurHash()), Collections.singletonList(null)));
+        Assertions.assertThrows(NullPointerException.class, () -> bloomFilter32.createCache(Collections.singletonList(null), Collections.singletonList("one")));
+    }
+
+    @Test
     void createCache_WithEmptyList_ThrowsIllegalArgumentException() {
         final BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
         Assertions.assertThrows(IllegalArgumentException.class, () -> bloomFilter32.createCache(Collections.emptyList(), Arrays.asList("one", "two")));
@@ -31,13 +38,13 @@ class BloomFilterTest {
     }
 
     @Test
-    void createCache_WithValidArguments_returnsBloomFilterWithoutExceptions() {
+    void createCache_WithValidArguments_ReturnsBloomFilterWithoutExceptions() {
         final BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
         Assertions.assertDoesNotThrow(() -> bloomFilter32.createCache(Collections.singletonList(new MurmurHash()), Arrays.asList("one", "two")));
     }
 
     @Test
-    void createCache_withOneHashAndOneItem_matchesOptimalBits() {
+    void createCache_WithOneHashAndOneItem_matchesOptimalBits() {
         final BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
         bloomFilter32.createCache(Collections.singletonList(new MurmurHash()), Collections.singletonList("one"));
         final BloomProperties bloomProperties = bloomFilter32.getProperties();
@@ -46,7 +53,7 @@ class BloomFilterTest {
     }
 
     @Test
-    void createCache_withOneHashAndOneItem_matchesBloomProperties() {
+    void createCache_WithOneHashAndOneItem_MatchesBloomProperties() {
         final BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
         bloomFilter32.createCache(Collections.singletonList(new MurmurHash()), Collections.singletonList("one"));
         final BloomProperties bloomProperties = bloomFilter32.getProperties();
@@ -57,14 +64,27 @@ class BloomFilterTest {
     }
 
     @Test
-    void isKeyPresent_withItemsFromList_match() {
+    void isKeyPresent_WithItemsFromList_Match() {
         BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
         bloomFilter32.createCache(Collections.singletonList(new MurmurHash()), Collections.singletonList("one"));
         assert bloomFilter32.isKeyPresent("one");
     }
 
     @Test
-    void isKeyPresent_keysFromWordList_allMatch() throws IOException, URISyntaxException {
+    void isKeyPresent_WithClassNotFullyConstructed_ThrowsIllegalStateException() {
+        BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
+        Assertions.assertThrows(IllegalStateException.class, () -> bloomFilter32.isKeyPresent("one"));
+    }
+
+    @Test
+    void isKeyPresent_WithNullArgument_ThrowsNPE() {
+        BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
+        bloomFilter32.createCache(Collections.singletonList(new MurmurHash()), Collections.singletonList("one"));
+        Assertions.assertThrows(NullPointerException.class, () -> bloomFilter32.isKeyPresent(null));
+    }
+
+    @Test
+    void isKeyPresent_KeysFromWordList_AllMatch() throws IOException, URISyntaxException {
         final List<String> wordList = loadWordList();
         final BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
         bloomFilter32.createCache(Arrays.asList(new MurmurHash(), new SpookyHash()), wordList);
@@ -73,7 +93,7 @@ class BloomFilterTest {
     }
 
     @Test
-    void isKeyPresent_randomStringsNotInWordList_lessThan1In200Match() throws IOException, URISyntaxException {
+    void isKeyPresent_RandomStringsNotInWordList_LessThan1In200Match() throws IOException, URISyntaxException {
         List<Double> falsePositiveList = new ArrayList<>();
         final List<String> wordList = loadWordList();
         final BloomFilter32<String> bloomFilter32 = new BloomFilter32<>();
